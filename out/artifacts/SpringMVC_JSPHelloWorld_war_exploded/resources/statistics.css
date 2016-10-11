@@ -1,0 +1,19 @@
+#filename_list{
+    list-style-type: none;
+    margin-left: 0px;
+    padding-left: 0px;
+    overflow-y: scroll;
+}
+
+#histogram{
+float: right;
+}
+
+#interval_graph{
+    width: 100px;
+    height: 100px;
+}
+
+#left_panel{
+    float: left;
+}
