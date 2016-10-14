@@ -14,11 +14,11 @@
 </head>
 <body>
 <%@include file="menu.jsp"%>
-<label>Файл данных:</label>
-<label>Радиус фотоприёмника:</label><br>
-<label>Смещение осветителя:</label><br>
-<label>Zmin осветителя:</label><br>
-<label>Шаг осветителя:</label><br>
+<label>Параметры прибора:</label>
+<label>Радиус фотоприёмника,мм:</label><br>
+<label>Смещение осветителя,мм:</label><br>
+<label>Zmin осветителя,мм:</label><br>
+<label>Шаг осветителя,мм:</label><br>
 <label>Количество точек на сечение</label><br>
 <label>Количество сечений:</label><br>
 <div id="src_name"></div>

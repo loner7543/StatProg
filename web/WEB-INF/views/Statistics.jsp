@@ -19,9 +19,8 @@
     <label>Ближайший к оптимальному профиль:</label><br>
     <label>Гипотеза о нормальном распределении:</label>
 
-<form:form modelAttribute="uploadForm" method="post" action="save.html" enctype="multipart/form-data">
-            <input name="files[0]" type="file" multiple="multiple" />
-            <input name="files[1]" type="file" />
+<form:form method="post" action="save.html" enctype="multipart/form-data">
+    <input type="file" id="my_file" name="files[]" multiple="multiple"> />
     <br/><input type="submit" value="Upload" />
 </form:form>
     <div id="histogram">
@@ -34,7 +33,7 @@
 
 </canvas>
 <div id="left_panel">
-    <input type="file" id="my_file" multiple=""><br>
+    <input type="file" id="my_file" name="my_file" multiple="multiple"><br>
     <label>Исходные файлы</label>
     <ul id="filename_list">
 

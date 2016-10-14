@@ -1,40 +1,107 @@
 package ru.javastudy.springMVC.model.statistics;
 
+import java.util.ArrayList;
+
 /**
  * Created by User on 08.10.2016.
  */
 public class StatisticsData {
-    private double Point;
-    private double Sko;
-    private double Psyst;
-    private double Psum;
-    private double DovInt;
+    private static double tx=2.17;
+    private static double sq3=Math.sqrt(3);
 
-    public StatisticsData(double point, double sko, double psyst, double psum,double dovInt) {
-        Point = point;
-        Sko = sko;
-        Psyst = psyst;
-        Psum = psum;
-        DovInt = dovInt;
+    private double point;
+    private double avg;
+    private int closest;
+    private double sko;//по наиболее близкому к усреднённому
+    private double syst;//Систематическая составляющая
+    private double psum;//Суммарная погрешность
+    private double dov;//Доверительный интервал
+    private double[] arrayAmplitudes;//массив амплитуд
+    private double[] relativeFrequency;//массив относительных вероятностей
+    private ArrayList<Double> bordersFrequency;//границы отрезков
+    private double valueKxSquare;//величина кси квадрат
+    private double levelTovalue;// уровень значимости, если -1,то гепотиза о нормальном законе распределения отклоняется
+    private double minLengthBorderc;
+
+    public StatisticsData(double point,double avg,int closest,double sko,double[] arrayAmplitudes, ArrayList<Double> bordersFrequency,
+                          double minLengthBorderc, double[] relativeFrequency, double valueKxSquare, double levelTovalue)
+    {
+        this.arrayAmplitudes=arrayAmplitudes;
+        this.point=point;
+        this.avg=avg;
+        this.closest=closest;
+        this.sko=sko;
+        syst=avg-arrayAmplitudes[closest];
+        psum=Math.max(Math.sqrt(sko*sko+syst*syst/3), sko+syst);
+        dov=(syst+tx*psum)/(syst/sq3+sko);
+        this.relativeFrequency=relativeFrequency;
+        this.bordersFrequency=bordersFrequency;
+        this.minLengthBorderc=minLengthBorderc;
+        this.valueKxSquare=valueKxSquare;
+        this.levelTovalue=levelTovalue;
     }
-
-    public double getPoint() {
-        return Point;
+    public double getAvg()
+    {
+        return avg;
     }
-
-    public double getSko() {
-        return Sko;
+    public double getPoint()
+    {
+        return point;
     }
-
-    public double getPsum() {
-        return Psum;
+    public int getClosest()
+    {
+        return closest;
     }
-
-    public double getDovInt() {
-        return DovInt;
+    public double getSko()
+    {
+        return sko;
     }
-
-    public double getPsyst() {
-        return Psyst;
+    public double getSyst()
+    {
+        return syst;
+    }
+    public double getPsum()
+    {
+        return psum;
+    }
+    public double getDov()
+    {
+        return dov;
+    }
+    public double[] getAmplitudes()
+    {
+        return arrayAmplitudes;
+    }
+    public double[] getRelativeFrequency()
+    {
+        return relativeFrequency;
+    }
+    public ArrayList<Double> getBordersFrequency()
+    {
+        return bordersFrequency;
+    }
+    public double getMinLengthBorderc()
+    {
+        return minLengthBorderc;
+    }
+    public double getLevelTovalue()
+    {
+        return levelTovalue;
+    }
+    public double getValueKxSquare()
+    {
+        return valueKxSquare;
+    }
+    public double getMaxAmplitudes()
+    {
+        double max=Double.NEGATIVE_INFINITY;
+        for(int i=0; i<arrayAmplitudes.length; i++)if(arrayAmplitudes[i]>max)max=arrayAmplitudes[i];
+        return max;
+    }
+    public double getMaxRelativeFrequency()
+    {
+        double max=Double.NEGATIVE_INFINITY;
+        for(int i=0; i<relativeFrequency.length; i++)if(relativeFrequency[i]>max)max=relativeFrequency[i];
+        return max;
     }
 }

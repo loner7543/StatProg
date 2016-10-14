@@ -1,21 +1,20 @@
 package ru.javastudy.springMVC.controller;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ru.javastudy.springMVC.model.User;
+import ru.javastudy.springMVC.model.convert.DatReader;
+import ru.javastudy.springMVC.model.statistics.ProfileStatistics;
 import ru.javastudy.springMVC.tools.FileUploadForm;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -34,10 +33,6 @@ public class MainController {
         return modelAndView;
     }
 
-    /*как только на index.jsp подтвердится форма
-    <spring:form method="post"  modelAttribute="userJSP" action="check-user">,
-    то попадем вот сюда
-     */
     @RequestMapping(value = "/check-user")
     public ModelAndView checkUser(@ModelAttribute("userJSP") User user) {
         ModelAndView modelAndView = new ModelAndView();
@@ -57,7 +52,6 @@ public class MainController {
 
     @RequestMapping(value = "/Profile", method = RequestMethod.GET)
     public ModelAndView showProfile(){
-        int asd = 666777;
         ModelAndView modelAndView = new ModelAndView("Profile");
         return modelAndView;
     }
@@ -65,35 +59,28 @@ public class MainController {
     @RequestMapping(value = "/Help", method = RequestMethod.GET)
     public ModelAndView showHelp(){
         ModelAndView modelAndView = new ModelAndView("Help");
-        int a = 5;
-        String upd = "ads";
-        String s = "New st";
-        s=upd;
         return modelAndView;
     }
 
-    @RequestMapping(value = "/UploadFile",method = RequestMethod.POST,consumes = "application/json")
-    public void uploadFile(@RequestBody String f) throws JSONException {
-        String s = f;
-        JSONObject jsonObject = new JSONObject(f);
-        Object file = jsonObject.get("file");
+    @RequestMapping(value = "/UploadFile",method = RequestMethod.POST)
+    public void uploadFile() {//
+        int a = 5;
+        int i = 6;
 
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute FileUploadForm uploadForm,Model map) throws IOException {
-        List<MultipartFile> files = uploadForm.getFiles();
+    public  @ResponseBody String save(@RequestParam("files[]") List<MultipartFile> files,Model map) throws IOException {
         List<String> fileNames = new ArrayList<String>();
+        List<ProfileStatistics> dataList = new LinkedList<>();//тут данные уже прошедшие через парсер
         if(null != files && files.size() > 0) {
             for (MultipartFile multipartFile : files) {
                 InputStream is = multipartFile.getInputStream();
-                byte[] data = multipartFile.getBytes();
                 String fileName = multipartFile.getOriginalFilename();
                 fileNames.add(fileName);
-                //Handle file content - multipartFile.getInputStream()
+                ProfileStatistics statistics = DatReader.readData(fileName,is);
+                dataList.add(statistics);
             }
-        }
-        map.addAttribute("files", fileNames);
-        return "file_upload_success";
     }
-}
+        return "file_upload_success";
+}}

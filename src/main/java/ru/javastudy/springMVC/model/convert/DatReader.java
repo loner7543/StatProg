@@ -2,10 +2,7 @@ package ru.javastudy.springMVC.model.convert;
 
 import ru.javastudy.springMVC.model.statistics.ProfileStatistics;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 /**
  * Created by User on 08.10.2016.
@@ -19,7 +16,7 @@ public class DatReader {
         return s;
     }
 
-    public static ProfileStatistics readData(String fileName) throws IOException
+    public static ProfileStatistics readData(String fileName,InputStream stream) throws IOException
     {
         try
         {
@@ -35,7 +32,7 @@ public class DatReader {
             double[] yOffset;                       //тета
             int i=0;
 
-            BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
+            BufferedReader in = new BufferedReader(new InputStreamReader(stream));
 
             String s=readLine(in);
             surfaceRadius = Double.parseDouble(s.substring(0, s.indexOf(" ")));
@@ -62,7 +59,9 @@ public class DatReader {
                 yOffset[i++]=Double.parseDouble(s.substring(s.lastIndexOf(" ")+1));
             }
 
-            return new ProfileStatistics(surfaceRadius, emitterYOffset, initialEmitterHeightPosition, emitterHeightStep, minReflectedLightCoord, maxReflectedLightCoord, discretePoints, radialProfilesNumber, xOffset, yOffset);
+            ProfileStatistics rs = new ProfileStatistics(surfaceRadius, emitterYOffset, initialEmitterHeightPosition, emitterHeightStep, minReflectedLightCoord, maxReflectedLightCoord, discretePoints, radialProfilesNumber, xOffset, yOffset);
+           in.close();
+            return rs;
         }
         catch (IOException ex)
         {
