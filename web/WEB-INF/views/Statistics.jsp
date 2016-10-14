@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
     <meta charset="UTF-8">
     <title>Statistics page</title>
@@ -17,8 +18,12 @@
     <label>Погрешность в точке:</label><br>
     <label>Ближайший к оптимальному профиль:</label><br>
     <label>Гипотеза о нормальном распределении:</label>
-<p>dfdff</p>
-<p>update action wok</p>
+
+<form:form modelAttribute="uploadForm" method="post" action="save.html" enctype="multipart/form-data">
+            <input name="files[0]" type="file" multiple="multiple" />
+            <input name="files[1]" type="file" />
+    <br/><input type="submit" value="Upload" />
+</form:form>
     <div id="histogram">
 
     </div><br>
@@ -38,7 +43,7 @@
     <input type="button" value="Удалить файл">
 </div>
 
-<input type="button" value="Рассчёт статистики" onclick="draw()"><br>
+<input type="button" value="Расчёт статистики" onclick="draw()"><br>
 <input type="button" value="Ручной ввод" onclick="abc()">
 </body>
 </html>

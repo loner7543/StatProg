@@ -9,7 +9,6 @@
 Введенный пароль: ${userJSP.password};
 <br/>
 <%@include file="menu.jsp"%>
-<p>update action wok</p>
 <p>add text to compile</p>
 </body>
 </html>

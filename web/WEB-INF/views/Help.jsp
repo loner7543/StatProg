@@ -14,7 +14,5 @@
 </head>
 <body>
 <%@include file="menu.jsp"%>
-<p>update action wok</p>
-<p>ff</p>
 </body>
 </html>

@@ -1,13 +1,22 @@
 package ru.javastudy.springMVC.controller;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import ru.javastudy.springMVC.model.User;
+import ru.javastudy.springMVC.tools.FileUploadForm;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Controller
@@ -64,8 +73,27 @@ public class MainController {
     }
 
     @RequestMapping(value = "/UploadFile",method = RequestMethod.POST,consumes = "application/json")
-    public void uploadFile(@RequestBody String f){
+    public void uploadFile(@RequestBody String f) throws JSONException {
         String s = f;
+        JSONObject jsonObject = new JSONObject(f);
+        Object file = jsonObject.get("file");
 
+    }
+
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String save(@ModelAttribute FileUploadForm uploadForm,Model map) throws IOException {
+        List<MultipartFile> files = uploadForm.getFiles();
+        List<String> fileNames = new ArrayList<String>();
+        if(null != files && files.size() > 0) {
+            for (MultipartFile multipartFile : files) {
+                InputStream is = multipartFile.getInputStream();
+                byte[] data = multipartFile.getBytes();
+                String fileName = multipartFile.getOriginalFilename();
+                fileNames.add(fileName);
+                //Handle file content - multipartFile.getInputStream()
+            }
+        }
+        map.addAttribute("files", fileNames);
+        return "file_upload_success";
     }
 }

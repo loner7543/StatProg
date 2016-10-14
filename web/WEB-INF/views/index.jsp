@@ -16,9 +16,6 @@
   <spring:button>Login</spring:button>
 
 </spring:form>
-<p>add text to compile11111111111111111111</p>
-<p>update action wok</p>
-<p>dededed</p>
 </body>
 
 </html>

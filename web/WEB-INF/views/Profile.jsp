@@ -21,8 +21,6 @@
 <label>Шаг осветителя:</label><br>
 <label>Количество точек на сечение</label><br>
 <label>Количество сечений:</label><br>
-<p>update action wok</p>
-<p>efefefe</p>
 <div id="src_name"></div>
   <div id="krugl">
 

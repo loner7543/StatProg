@@ -35,25 +35,9 @@ function UploadFile(){
         li.innerHTML=files[i].name;
         list.append(li);
     }
-    var data = {
-        file:files[0]
-
-    };
-    $.ajax({
-        url: 'UploadFile',
-        data: JSON.stringify(data),
-        type: 'POST',
-        //dataType: "json",
-        contentType: 'application/json', //charset=utf-8,
-        success: function (data, textStatus, jqXHR) {
-            console.log(data);
-            location.reload();
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert(errorThrown);
-        }
-
-    });
+var  xhr = new XMLHttpRequest();
+    xhr.open("POST",url,true);
+    xhr.send(files);
    /* var xhr = new XMLHttpRequest();
     xhr.upload.onprogress = function(event){
         //log(event.loaded)
