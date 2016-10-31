@@ -21,6 +21,7 @@
 <label>Шаг осветителя,мм:</label><br>
 <label>Количество точек на сечение</label><br>
 <label>Количество сечений:</label><br>
+<input type="button" value="Расчет профиля" onclick="">
 <div id="src_name"></div>
   <div id="krugl">
 

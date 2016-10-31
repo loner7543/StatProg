@@ -20,6 +20,7 @@ import java.util.List;
 
 @Controller
 public class MainController {
+    private  List<ProfileStatistics> dataList;
 
     /*First method on start application*/
     /*Попадаем сюда на старте приложения (см. параметры аннтоции и настройки пути после деплоя) */
@@ -62,17 +63,20 @@ public class MainController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "/UploadFile",method = RequestMethod.POST)
-    public void uploadFile() {//
-        int a = 5;
-        int i = 6;
+    @RequestMapping(value = "/CalcProfile",method = RequestMethod.POST)
+    public ModelAndView calculateProfile() {
+        ModelAndView modelAndView = new ModelAndView("Profile");
 
+        if(dataList!=null&&!dataList.isEmpty()){
+
+        }
+        return modelAndView;
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public  @ResponseBody String save(@RequestParam("files[]") List<MultipartFile> files,Model map) throws IOException {
         List<String> fileNames = new ArrayList<String>();
-        List<ProfileStatistics> dataList = new LinkedList<>();//тут данные уже прошедшие через парсер
+        dataList = new LinkedList<>();//тут данные уже прошедшие через парсер
         if(null != files && files.size() > 0) {
             for (MultipartFile multipartFile : files) {
                 InputStream is = multipartFile.getInputStream();
