@@ -5,9 +5,6 @@
     overflow-y: scroll;
 }
 
-#histogram{
-float: right;
-}
 
 #interval_graph{
     width: 100px;
@@ -16,4 +13,13 @@ float: right;
 
 #left_panel{
     float: left;
+}
+
+.bar rect {
+    fill: steelblue;
+}
+
+.bar text {
+    fill: #fff;
+    font: 14pt sans-serif;
 }
