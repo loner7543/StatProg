@@ -22,8 +22,6 @@ import java.util.List;
 public class MainController {
     private  List<ProfileStatistics> dataList;
 
-    /*First method on start application*/
-    /*Попадаем сюда на старте приложения (см. параметры аннтоции и настройки пути после деплоя) */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView main() {
         ModelAndView modelAndView = new ModelAndView();

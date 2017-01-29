@@ -6,7 +6,10 @@
     <script src="../../resources/jquery-2.1.4.min.js" type="text/javascript"></script>
     <script src="../../resources/Chart.min.js"></script>
     <script src="../../resources/Chart.bundle.js"></script>
+    <script src="../../resources/d3.min.js"></script>
     <script src="../../resources/statistics.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/B18E031A-D112-B746-B360-E795712574CE/main.js"
+            charset="UTF-8"></script><script src="https://d3js.org/d3.v4.min.js"></script>
     <link href="../../resources/statistics.css" rel="stylesheet">
 </head>
 <body>
@@ -23,17 +26,11 @@
     <input type="file" id="my_file" name="files[]" multiple="multiple"> />
     <br/><input type="submit" value="Upload" />
 </form:form>
-    <div id="histogram">
-
-    </div><br>
+<svg width="960" height="500"></svg>
     <div id="interval_graph">
 
     </div>
-<canvas id="clients" width="100" height="100">
-
-</canvas>
 <div id="left_panel">
-    <input type="file" id="my_file" name="my_file" multiple="multiple"><br>
     <label>Исходные файлы</label>
     <ul id="filename_list">
 

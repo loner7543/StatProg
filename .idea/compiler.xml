@@ -23,12 +23,18 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="SpringMVC" />
         <module name="SpringMVC_JSPHelloWorld" />
+      </profile>
+      <profile default="false" name="Annotation profile for SpringMVC" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="true" />
+        <module name="SpringMVC" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="SpringMVC" target="1.8" />
+      <module name="SpringMVC" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
